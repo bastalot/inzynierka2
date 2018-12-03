@@ -103,4 +103,5 @@ public class MainActivity extends AppCompatActivity {
         suggestList = database.getNames();
         materialSearchBar.setLastSuggestions(suggestList);
     }
+
 }

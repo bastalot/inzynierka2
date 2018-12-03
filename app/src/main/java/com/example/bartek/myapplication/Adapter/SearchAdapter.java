@@ -2,12 +2,15 @@ package com.example.bartek.myapplication.Adapter;
 
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.example.bartek.myapplication.BusStop;
+import com.example.bartek.myapplication.MainActivity;
 import com.example.bartek.myapplication.Model.Przystanek;
 import com.example.bartek.myapplication.R;
 
@@ -15,11 +18,24 @@ import java.util.List;
 
 class SearchViewHolder extends RecyclerView.ViewHolder{
 
+    public View view;
     public TextView nazwa_przystanku;
 
-    public SearchViewHolder(View itemView) {
+
+
+    public SearchViewHolder(final View itemView) {
         super(itemView);
         nazwa_przystanku = (TextView)itemView.findViewById(R.id.nazwa_przystanku);
+
+        itemView.getContext();
+        view = itemView;
+        view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(itemView.getContext(), BusStop.class);
+                itemView.getContext().startActivity(intent);
+            }
+        });
     }
 }
 
