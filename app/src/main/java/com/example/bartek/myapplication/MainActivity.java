@@ -3,7 +3,6 @@ package com.example.bartek.myapplication;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.ListViewCompat;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -100,7 +99,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void loadSuggestList() {
-        suggestList = database.getNames();
+        suggestList = database.getPrzystanekNames();
         materialSearchBar.setLastSuggestions(suggestList);
     }
 

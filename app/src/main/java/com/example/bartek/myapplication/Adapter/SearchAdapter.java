@@ -37,12 +37,14 @@ class SearchViewHolder extends RecyclerView.ViewHolder{
             }
         });
     }
+
+
 }
 
 public class SearchAdapter extends RecyclerView.Adapter<SearchViewHolder> {
 
-    private Context context;
     private List<Przystanek> przystanek;
+    private Context context;
 
     public SearchAdapter(Context context, List<Przystanek> przystanek) {
         this.context = context;
