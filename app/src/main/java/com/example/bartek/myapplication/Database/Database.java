@@ -94,7 +94,7 @@ public class Database extends SQLiteAssetHelper {
         return result;
     }
 
-    /*public String getPrzystanekById(int id, String przystanek) {
+    public String getPrzystanekById(String id, String przystanek) {
 
         SQLiteDatabase db = getReadableDatabase();
         SQLiteQueryBuilder qb = new SQLiteQueryBuilder();
@@ -109,6 +109,7 @@ public class Database extends SQLiteAssetHelper {
 
 
         Cursor cursor = qb.query(db, sqlSelect, tablePrzystanek+".idprzystanek="+id,null, null, null, null);
+        cursor.moveToFirst();
         String result = cursor.getString(cursor.getColumnIndex("nazwa_przystanku"));
 
         //List<String> result = new ArrayList<>();
@@ -118,8 +119,8 @@ public class Database extends SQLiteAssetHelper {
                 result.add(cursor.getString(cursor.getColumnIndex("nazwa_przystanku")));
             } while (cursor.moveToNext());
         }*/
-        //return result;
-    //}
+        return result;
+    }
 
     public List<Bus> getBus()
     {
@@ -137,8 +138,8 @@ public class Database extends SQLiteAssetHelper {
             do{
                 Bus bus = new Bus();
                 bus.setIdlinia_autobusowa(cursor.getInt(cursor.getColumnIndex("idlinia_autobusowa")));
-                bus.setPrzystanek_poczatkowy(cursor.getInt(cursor.getColumnIndex("przystanek_poczatkowy")));
-                bus.setPrzystanek_koncowy(cursor.getInt(cursor.getColumnIndex("przystanek_koncowy")));
+                bus.setPrzystanek_poczatkowy(getPrzystanekById(cursor.getString(cursor.getColumnIndex("przystanek_poczatkowy")),"przystanek_poczatkowy"));
+                bus.setPrzystanek_koncowy(getPrzystanekById(cursor.getString(cursor.getColumnIndex("przystanek_koncowy")), "przystanek_koncowy"));
 
                 result.add(bus);
             } while (cursor.moveToNext());
@@ -222,8 +223,8 @@ public class Database extends SQLiteAssetHelper {
             do{
                 Bus bus = new Bus();
                 bus.setIdlinia_autobusowa(cursor.getInt(cursor.getColumnIndex("idlinia_autobusowa")));
-                bus.setPrzystanek_poczatkowy(cursor.getInt(cursor.getColumnIndex("przystanek_poczatkowy")));
-                bus.setPrzystanek_koncowy(cursor.getInt(cursor.getColumnIndex("przystanek_koncowy")));
+                bus.setPrzystanek_poczatkowy(cursor.getString(cursor.getColumnIndex("przystanek_poczatkowy")));
+                bus.setPrzystanek_koncowy(cursor.getString(cursor.getColumnIndex("przystanek_koncowy")));
 
                 result.add(bus);
             } while (cursor.moveToNext());
