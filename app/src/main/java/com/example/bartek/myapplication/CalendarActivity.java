@@ -1,5 +1,6 @@
 package com.example.bartek.myapplication;
 
+import android.content.ClipData;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -14,8 +15,8 @@ import java.util.HashSet;
 
 public class CalendarActivity extends AppCompatActivity {
 
-    private TextView tv_bus;
-    private TextView tv_events;
+    //private TextView tv_bus;
+    //private TextView tv_events;
 
 
 
@@ -33,8 +34,8 @@ public class CalendarActivity extends AppCompatActivity {
         CalendarView cv = ((CalendarView)findViewById(R.id.calendar_view));
         cv.updateCalendar(events);
 
-        tv_events = (TextView)findViewById(R.id.event_menu);
-        tv_bus = (TextView)findViewById(R.id.bus_menu);
+        //tv_events = (TextView)findViewById(R.id.event_menu);
+        //tv_bus = (TextView)findViewById(R.id.bus_menu);
 
 
 
@@ -51,7 +52,7 @@ public class CalendarActivity extends AppCompatActivity {
             }
         });
 
-        tv_bus.setOnClickListener(new View.OnClickListener() {
+        /*tv_bus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
@@ -61,7 +62,7 @@ public class CalendarActivity extends AppCompatActivity {
 
 
             }
-        });
+        });*/
 
 
     }
