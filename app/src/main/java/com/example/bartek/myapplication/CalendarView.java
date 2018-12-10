@@ -50,6 +50,9 @@ public class CalendarView extends LinearLayout
     private TextView txtDate;
     private GridView grid;
 
+
+
+
     // seasons' rainbow
     int[] rainbow = new int[] {
             R.color.summer,
@@ -117,6 +120,8 @@ public class CalendarView extends LinearLayout
         btnNext = (ImageView)findViewById(R.id.next_month);
         txtDate = (TextView)findViewById(R.id.display_current_date);
         grid = (GridView)findViewById(R.id.cal_grid);
+
+
     }
 
     private void assignClickHandlers()
@@ -160,17 +165,12 @@ public class CalendarView extends LinearLayout
         });
     }
 
-    /**
-     * Display dates correctly in grid
-     */
     public void updateCalendar()
     {
         updateCalendar(null);
     }
 
-    /**
-     * Display dates correctly in grid
-     */
+
     public void updateCalendar(HashSet<Date> events)
     {
         ArrayList<Date> cells = new ArrayList<>();
@@ -237,8 +237,9 @@ public class CalendarView extends LinearLayout
             if (view == null)
                 view = inflater.inflate(R.layout.layout_calendar_item, parent, false);
 
-            // if this day has an event, specify event image
+            /* if this day has an event, specify event image
             view.setBackgroundResource(0);
+
             if (eventDays != null)
             {
                 for (Date eventDate : eventDays)
@@ -252,20 +253,20 @@ public class CalendarView extends LinearLayout
                         break;
                     }
                 }
-            }
+            } */
 
             // clear styling
             ((TextView)view).setTypeface(null, Typeface.NORMAL);
             ((TextView)view).setTextColor(Color.BLACK);
 
-            if (month != today.getMonth() || year != today.getYear())
+            if (month != currentDate.getTime().getMonth() || year != currentDate.getTime().getYear())
             {
                 // if this day is outside current month, grey it out
                 ((TextView)view).setTextColor(getResources().getColor(R.color.greyed_out));
             }
-            else if (day == today.getDate())
+            else if (month == today.getMonth() && year == today.getYear() && day == today.getDate())
             {
-                // if it is today, set it to blue/bold
+
                 ((TextView)view).setTypeface(null, Typeface.BOLD);
                 ((TextView)view).setTextColor(getResources().getColor(R.color.today));
             }
@@ -293,4 +294,8 @@ public class CalendarView extends LinearLayout
     {
         void onDayLongPress(Date date);
     }
+
+
+
+
 }
