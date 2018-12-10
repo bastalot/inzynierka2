@@ -7,6 +7,7 @@ import android.database.sqlite.SQLiteQueryBuilder;
 
 import com.example.bartek.myapplication.Model.Bus;
 import com.example.bartek.myapplication.Model.Przystanek;
+import com.example.bartek.myapplication.Model.Rozklad;
 import com.readystatesoftware.sqliteasset.SQLiteAssetHelper;
 
 import java.util.ArrayList;
@@ -232,5 +233,56 @@ public class Database extends SQLiteAssetHelper {
         return result;
     }
 
+    public List<Rozklad> getRozklad()
+    {
+        SQLiteDatabase db = getReadableDatabase();
+        SQLiteQueryBuilder qb = new SQLiteQueryBuilder();
+
+        String[] sqlSelect = {"idrozklad_jazdy", "idlinia_autobusowa", "idprzystanek", "godzina_odjazdu", "typ_dnia"};
+        String tableName = "rozklad_jazdy";
+
+        qb.setTables(tableName);
+        Cursor cursor = qb.query(db, sqlSelect, null,null,null,null,null);
+        List<Rozklad> result = new ArrayList<>();
+        if(cursor.moveToFirst())
+        {
+            do{
+                Rozklad rozklad = new Rozklad();
+                rozklad.setIdRozklad_jazdy(cursor.getInt(cursor.getColumnIndex("idrozklad_jazdy")));
+                rozklad.setIdLinia_autobusowa(cursor.getInt(cursor.getColumnIndex("idlinia_autobusowa")));
+                rozklad.setIdprzystanek(cursor.getInt(cursor.getColumnIndex("idprzystanek")));
+                rozklad.setGodzina_odjazdu(cursor.getString(cursor.getColumnIndex("godzina_odjazdu")));
+                rozklad.setTyp_dnia(cursor.getString(cursor.getColumnIndex("typ_dnia")));
+
+                result.add(rozklad);
+            } while (cursor.moveToNext());
+        }
+        return result;
+    }
+/*
+    public List<String> getRozkladById()
+    {
+
+    }
+
+    public List<String> getRozkladByLinia()
+    {
+
+    }
+
+    public List<String> getRozkladByPrzystanek()
+    {
+
+    }
+
+    public List<String> getRozkladByGodzina()
+    {
+
+    }
+
+    public List<String> getTypDnia()
+    {
+
+    }*/
 
 }

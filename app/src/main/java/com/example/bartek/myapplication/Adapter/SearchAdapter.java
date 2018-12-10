@@ -10,7 +10,6 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.bartek.myapplication.BusStop;
-import com.example.bartek.myapplication.MainActivity;
 import com.example.bartek.myapplication.Model.Przystanek;
 import com.example.bartek.myapplication.R;
 
