@@ -1,11 +1,15 @@
 package com.example.bartek.myapplication;
 
+import android.content.Intent;
+import android.support.annotation.NonNull;
+import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.MenuItem;
 
 import com.example.bartek.myapplication.Adapter.SearchAdapter;
 import com.example.bartek.myapplication.Database.Database;
@@ -24,6 +28,8 @@ public class BusActivity extends AppCompatActivity {
     List<String> suggestList = new ArrayList<>();
 
     Database database;
+
+    private BottomNavigationView mBottomNav;
 
 
     @Override
@@ -89,6 +95,15 @@ public class BusActivity extends AppCompatActivity {
 
         adapter = new SearchAdapter(this, database.getPrzystanek());
         recyclerView.setAdapter(adapter);
+
+        mBottomNav = (BottomNavigationView) findViewById(R.id.navigation);
+        mBottomNav.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                selectFragment(item);
+                return true;
+            }
+        });
     }
 
     private void startSearch(String text) {
@@ -103,4 +118,22 @@ public class BusActivity extends AppCompatActivity {
         materialSearchBar.setLastSuggestions(suggestList);
     }
 
+    private void selectFragment(MenuItem item) {
+
+        switch (item.getItemId()) {
+            case R.id.menu_cal:
+                Intent intent = new Intent(this, CalendarActivity.class);
+                startActivity(intent);
+                break;
+            case R.id.menu_bus:
+                Intent intent1 = new Intent(this, BusActivity.class);
+                startActivity(intent1);
+                break;
+            case R.id.menu_events:
+                Intent intent2 = new Intent(this, EventActivity.class);
+                startActivity(intent2);
+                break;
+
+        }
+    }
 }
