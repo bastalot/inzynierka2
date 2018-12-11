@@ -44,8 +44,8 @@ public class EventActivity extends AppCompatActivity {
                 startActivity(intent1);
                 break;
             case R.id.menu_events:
-                Intent intent2 = new Intent(this, EventActivity.class);
-                startActivity(intent2);
+                //Intent intent2 = new Intent(this, EventActivity.class);
+                //startActivity(intent2);
                 break;
 
         }

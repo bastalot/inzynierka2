@@ -126,8 +126,8 @@ public class BusActivity extends AppCompatActivity {
                 startActivity(intent);
                 break;
             case R.id.menu_bus:
-                Intent intent1 = new Intent(this, BusActivity.class);
-                startActivity(intent1);
+                //Intent intent1 = new Intent(this, BusActivity.class);
+                //startActivity(intent1);
                 break;
             case R.id.menu_events:
                 Intent intent2 = new Intent(this, EventActivity.class);

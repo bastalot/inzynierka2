@@ -81,8 +81,8 @@ public class CalendarActivity extends AppCompatActivity {
 
         switch (item.getItemId()) {
             case R.id.menu_cal:
-                Intent intent = new Intent(this, CalendarActivity.class);
-                startActivity(intent);
+                //Intent intent = new Intent(this, CalendarActivity.class);
+                //startActivity(intent);
                 break;
             case R.id.menu_bus:
                 Intent intent1 = new Intent(this, BusActivity.class);
