@@ -32,6 +32,7 @@ class SearchViewHolder extends RecyclerView.ViewHolder{
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(itemView.getContext(), BusStop.class);
+                intent.putExtra("nazwa", nazwa_przystanku.getText().toString());
                 itemView.getContext().startActivity(intent);
             }
         });

@@ -259,12 +259,19 @@ public class Database extends SQLiteAssetHelper {
         }
         return result;
     }
+
 /*
     public List<String> getRozkladById()
     {
+        SQLiteDatabase db = getReadableDatabase();
+        SQLiteQueryBuilder qb = new SQLiteQueryBuilder();
+
+        String tablePrzystanek="przystanek";
+        String tableRozklad="rozklad_jazdy";
+
 
     }
-
+/*
     public List<String> getRozkladByLinia()
     {
 
@@ -283,6 +290,6 @@ public class Database extends SQLiteAssetHelper {
     public List<String> getTypDnia()
     {
 
-    }*/
-
+    }
+*/
 }

@@ -35,7 +35,7 @@ public class BusActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_bus);
 
         recyclerView = (RecyclerView)findViewById(R.id.recycler_search);
         layoutManager = new LinearLayoutManager(this);

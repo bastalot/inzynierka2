@@ -22,6 +22,7 @@ public class BusStop extends AppCompatActivity {
     RecyclerView recyclerView;
     RecyclerView.LayoutManager layoutManager;
     BusAdapter adapter;
+    TextView nazwa_przystanku;
 
     List<String> suggestList = new ArrayList<>();
 
@@ -35,6 +36,10 @@ public class BusStop extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_busstop);
+
+        Bundle bundle = getIntent().getExtras();
+        nazwa_przystanku = (TextView)findViewById(R.id.nazwa_przystanku);
+        nazwa_przystanku.setText(bundle.getString("nazwa"));
 
         recyclerView = (RecyclerView)findViewById(R.id.recycler_bus);
         layoutManager = new LinearLayoutManager(this);
