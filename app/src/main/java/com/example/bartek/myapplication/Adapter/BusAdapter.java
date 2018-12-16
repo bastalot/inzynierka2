@@ -8,10 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.example.bartek.myapplication.BusStop;
-import com.example.bartek.myapplication.Database.Database;
-import com.example.bartek.myapplication.Model.Bus;
-import com.example.bartek.myapplication.Model.Przystanek;
+import com.example.bartek.myapplication.Model.Rozklad;
 import com.example.bartek.myapplication.R;
 
 import java.util.List;
@@ -19,7 +16,7 @@ import java.util.List;
 class BusViewHolder extends RecyclerView.ViewHolder{
 
     public View view;
-    public TextView idlinia_autobusowa, przystanek_poczatkowy, przystanek_koncowy;
+    public TextView idlinia_autobusowa, przystanek_poczatkowy, przystanek_koncowy, godzina_odjazdu;
 
 
     public BusViewHolder(View itemView) {
@@ -27,18 +24,25 @@ class BusViewHolder extends RecyclerView.ViewHolder{
         idlinia_autobusowa = (TextView)itemView.findViewById(R.id.idlinia_autobusowa);
         przystanek_poczatkowy = (TextView)itemView.findViewById(R.id.przystanek_poczatkowy);
         przystanek_koncowy = (TextView)itemView.findViewById(R.id.przystanek_koncowy);
+        godzina_odjazdu = (TextView)itemView.findViewById(R.id.godzina_odjazdu);
 
     }
 }
 
 public class BusAdapter extends RecyclerView.Adapter<BusViewHolder>{
 
-    private List<Bus> bus;
+    //private List<Bus> bus;
+    private List<Rozklad> rozklad;
     private Context context;
 
-
+/*
     public BusAdapter(List<Bus> bus, Context context) {
         this.bus = bus;
+        this.context = context;
+    }*/
+
+    public BusAdapter(List<Rozklad> rozklad, Context context) {
+        this.rozklad = rozklad;
         this.context = context;
     }
 
@@ -51,17 +55,18 @@ public class BusAdapter extends RecyclerView.Adapter<BusViewHolder>{
 
     @Override
     public void onBindViewHolder(BusViewHolder holder, int position) {
-        holder.idlinia_autobusowa.setText(Integer.toString(bus.get(position).getIdlinia_autobusowa()));
+        holder.idlinia_autobusowa.setText(Integer.toString(rozklad.get(position).getIdlinia_autobusowa()));
         //holder.przystanek_poczatkowy.setText(db.getPrzystanekById(Integer.valueOf(bus.get(position).getPrzystanek_poczatkowy()), "przystanek_poczatkowy"));
         //holder.przystanek_koncowy.setText(db.getPrzystanekById(Integer.valueOf(bus.get(position).getPrzystanek_koncowy()), "przystanek_koncowy"));
         //holder.przystanek_poczatkowy.setText(Integer.toString(bus.get(position).getPrzystanek_poczatkowy()));
         //holder.przystanek_koncowy.setText(Integer.toString(bus.get(position).getPrzystanek_koncowy()));
-        holder.przystanek_poczatkowy.setText(bus.get(position).getPrzystanek_poczatkowy());
-        holder.przystanek_koncowy.setText(bus.get(position).getPrzystanek_koncowy());
+        holder.przystanek_poczatkowy.setText(rozklad.get(position).getPrzystanek_poczatkowy());
+        holder.przystanek_koncowy.setText(rozklad.get(position).getPrzystanek_koncowy());
+        holder.godzina_odjazdu.setText(rozklad.get(position).getGodzina_odjazdu());
     }
 
     @Override
     public int getItemCount() {
-        return bus.size();
+        return rozklad.size();
     }
 }

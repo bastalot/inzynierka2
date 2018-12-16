@@ -10,7 +10,11 @@ import com.example.bartek.myapplication.Model.Przystanek;
 import com.example.bartek.myapplication.Model.Rozklad;
 import com.readystatesoftware.sqliteasset.SQLiteAssetHelper;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 public class Database extends SQLiteAssetHelper {
@@ -233,26 +237,35 @@ public class Database extends SQLiteAssetHelper {
         return result;
     }
 
-    public List<Rozklad> getRozklad()
-    {
+
+
+    public List<Rozklad> getRozklad2(String przystanek){
+
         SQLiteDatabase db = getReadableDatabase();
         SQLiteQueryBuilder qb = new SQLiteQueryBuilder();
 
-        String[] sqlSelect = {"idrozklad_jazdy", "idlinia_autobusowa", "idprzystanek", "godzina_odjazdu", "typ_dnia"};
-        String tableName = "rozklad_jazdy";
+
+        String[] sqlSelect = {"rozklad_jazdy.godzina_odjazdu", "rozklad_jazdy.idlinia_autobusowa", "linia_autobusowa.przystanek_poczatkowy", "linia_autobusowa.przystanek_koncowy"};
+        String tableName = "rozklad_jazdy JOIN linia_autobusowa ON rozklad_jazdy.idlinia_autobusowa=linia_autobusowa.idlinia_autobusowa JOIN przystanek ON rozklad_jazdy.idprzystanek=przystanek.idprzystanek";
+        String where = "przystanek.nazwa_przystanku='"+przystanek+"' AND rozklad_jazdy.godzina_odjazdu>='"+getCurrentTimeUsingCalendar()+"'";
 
         qb.setTables(tableName);
-        Cursor cursor = qb.query(db, sqlSelect, null,null,null,null,null);
+        Cursor cursor = qb.query(db, sqlSelect, where,null,"rozklad_jazdy.godzina_odjazdu",null,null);
         List<Rozklad> result = new ArrayList<>();
         if(cursor.moveToFirst())
         {
             do{
                 Rozklad rozklad = new Rozklad();
-                rozklad.setIdRozklad_jazdy(cursor.getInt(cursor.getColumnIndex("idrozklad_jazdy")));
-                rozklad.setIdLinia_autobusowa(cursor.getInt(cursor.getColumnIndex("idlinia_autobusowa")));
-                rozklad.setIdprzystanek(cursor.getInt(cursor.getColumnIndex("idprzystanek")));
+                //rozklad.setIdRozklad_jazdy(cursor.getInt(cursor.getColumnIndex("idrozklad_jazdy")));
+                //rozklad.setIdLinia_autobusowa(cursor.getInt(cursor.getColumnIndex("idlinia_autobusowa")));
+                //rozklad.setIdprzystanek(cursor.getInt(cursor.getColumnIndex("idprzystanek")));
+                //rozklad.setGodzina_odjazdu(cursor.getString(cursor.getColumnIndex("godzina_odjazdu")));
+                //rozklad.setTyp_dnia(cursor.getString(cursor.getColumnIndex("typ_dnia")));
+
+                rozklad.setIdlinia_autobusowa(cursor.getInt(cursor.getColumnIndex("idlinia_autobusowa")));
+                rozklad.setPrzystanek_poczatkowy(getPrzystanekById(cursor.getString(cursor.getColumnIndex("przystanek_poczatkowy")), "przystanek_poczatkowy"));
+                rozklad.setPrzystanek_koncowy(getPrzystanekById(cursor.getString(cursor.getColumnIndex("przystanek_koncowy")), "przystanek_koncowy"));
                 rozklad.setGodzina_odjazdu(cursor.getString(cursor.getColumnIndex("godzina_odjazdu")));
-                rozklad.setTyp_dnia(cursor.getString(cursor.getColumnIndex("typ_dnia")));
 
                 result.add(rozklad);
             } while (cursor.moveToNext());
@@ -292,4 +305,12 @@ public class Database extends SQLiteAssetHelper {
 
     }
 */
+
+public String getCurrentTimeUsingCalendar() {
+    Calendar cal = Calendar.getInstance();
+    Date date=cal.getTime();
+    DateFormat dateFormat = new SimpleDateFormat("HH:mm");
+    String formattedDate=dateFormat.format(date);
+    return formattedDate;
+}
 }

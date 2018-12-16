@@ -1,43 +1,21 @@
 package com.example.bartek.myapplication.Model;
 
-public class Rozklad {
+public class Rozklad extends Bus {
 
-    public int idrozklad_jazdy, idlinia_autobusowa, idprzystanek;
-    public String godzina_odjazdu, typ_dnia;
+    public String godzina_odjazdu, idprzystanek;
 
-    public Rozklad(int idrozklad_jazdy, int idlinia_autobusowa, int idprzystanek, String godzina_odjazdu, String typ_dnia) {
-        this.idrozklad_jazdy = idrozklad_jazdy;
-        this.idlinia_autobusowa = idlinia_autobusowa;
-        this.idprzystanek = idprzystanek;
+    public Rozklad(int idlinia_autobusowa, String przystanek_poczatkowy, String przystanek_koncowy, String godzina_odjazdu, String idprzystanek) {
+        super(idlinia_autobusowa, przystanek_poczatkowy, przystanek_koncowy);
         this.godzina_odjazdu = godzina_odjazdu;
-        this.typ_dnia = typ_dnia;
-    }
-
-    public Rozklad() {
-    }
-
-    public int getRozklad_jazdy() {
-        return idrozklad_jazdy;
-    }
-
-    public void setIdRozklad_jazdy(int rozklad_jazdy) {
-        this.idrozklad_jazdy = rozklad_jazdy;
-    }
-
-    public int getLinia_autobusowa() {
-        return idlinia_autobusowa;
-    }
-
-    public void setIdLinia_autobusowa(int linia_autobusowa) {
-        this.idlinia_autobusowa = linia_autobusowa;
-    }
-
-    public int getIdprzystanek() {
-        return idprzystanek;
-    }
-
-    public void setIdprzystanek(int idprzystanek) {
         this.idprzystanek = idprzystanek;
+    }
+
+    public Rozklad(String godzina_odjazdu, String idprzystanek) {
+        this.godzina_odjazdu = godzina_odjazdu;
+        this.idprzystanek = idprzystanek;
+    }
+
+    public Rozklad(){
     }
 
     public String getGodzina_odjazdu() {
@@ -48,11 +26,11 @@ public class Rozklad {
         this.godzina_odjazdu = godzina_odjazdu;
     }
 
-    public String getTyp_dnia() {
-        return typ_dnia;
+    public String getIdprzystanek() {
+        return idprzystanek;
     }
 
-    public void setTyp_dnia(String typ_dnia) {
-        this.typ_dnia = typ_dnia;
+    public void setIdprzystanek(String idprzystanek) {
+        this.idprzystanek = idprzystanek;
     }
 }
