@@ -35,12 +35,6 @@ public class BusAdapter extends RecyclerView.Adapter<BusViewHolder>{
     private List<Rozklad> rozklad;
     private Context context;
 
-/*
-    public BusAdapter(List<Bus> bus, Context context) {
-        this.bus = bus;
-        this.context = context;
-    }*/
-
     public BusAdapter(List<Rozklad> rozklad, Context context) {
         this.rozklad = rozklad;
         this.context = context;
@@ -56,10 +50,6 @@ public class BusAdapter extends RecyclerView.Adapter<BusViewHolder>{
     @Override
     public void onBindViewHolder(BusViewHolder holder, int position) {
         holder.idlinia_autobusowa.setText(Integer.toString(rozklad.get(position).getIdlinia_autobusowa()));
-        //holder.przystanek_poczatkowy.setText(db.getPrzystanekById(Integer.valueOf(bus.get(position).getPrzystanek_poczatkowy()), "przystanek_poczatkowy"));
-        //holder.przystanek_koncowy.setText(db.getPrzystanekById(Integer.valueOf(bus.get(position).getPrzystanek_koncowy()), "przystanek_koncowy"));
-        //holder.przystanek_poczatkowy.setText(Integer.toString(bus.get(position).getPrzystanek_poczatkowy()));
-        //holder.przystanek_koncowy.setText(Integer.toString(bus.get(position).getPrzystanek_koncowy()));
         holder.przystanek_poczatkowy.setText(rozklad.get(position).getPrzystanek_poczatkowy());
         holder.przystanek_koncowy.setText(rozklad.get(position).getPrzystanek_koncowy());
         holder.godzina_odjazdu.setText(rozklad.get(position).getGodzina_odjazdu());

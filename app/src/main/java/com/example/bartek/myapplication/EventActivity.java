@@ -6,12 +6,15 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 public class EventActivity extends AppCompatActivity {
 
     private TextView tv1;
     private BottomNavigationView mBottomNav;
+    private Spinner spinner;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -20,6 +23,11 @@ public class EventActivity extends AppCompatActivity {
         setContentView(R.layout.activity_events);
 
         tv1 = (TextView)findViewById(R.id.tv1);
+
+        spinner = (Spinner)findViewById(R.id.spinner);
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.wydarzenia, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(adapter);
 
         mBottomNav = (BottomNavigationView) findViewById(R.id.navigation);
         mBottomNav.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {

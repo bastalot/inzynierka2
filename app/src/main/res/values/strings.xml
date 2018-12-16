@@ -3,4 +3,11 @@
     <string name="busname">MPK</string>
     <string name="cal_name">Kalendarz</string>
     <string name="events_name">Eventy</string>
+
+    <string-array name="wydarzenia">
+        <item>Koncerty</item>
+        <item>Imprezy</item>
+        <item>Teatr</item>
+        <item>Kino</item>
+    </string-array>
 </resources>

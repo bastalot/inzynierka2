@@ -117,13 +117,6 @@ public class Database extends SQLiteAssetHelper {
         cursor.moveToFirst();
         String result = cursor.getString(cursor.getColumnIndex("nazwa_przystanku"));
 
-        //List<String> result = new ArrayList<>();
-        /*if(cursor.moveToFirst())
-        {
-            do{
-                result.add(cursor.getString(cursor.getColumnIndex("nazwa_przystanku")));
-            } while (cursor.moveToNext());
-        }*/
         return result;
     }
 
@@ -256,11 +249,6 @@ public class Database extends SQLiteAssetHelper {
         {
             do{
                 Rozklad rozklad = new Rozklad();
-                //rozklad.setIdRozklad_jazdy(cursor.getInt(cursor.getColumnIndex("idrozklad_jazdy")));
-                //rozklad.setIdLinia_autobusowa(cursor.getInt(cursor.getColumnIndex("idlinia_autobusowa")));
-                //rozklad.setIdprzystanek(cursor.getInt(cursor.getColumnIndex("idprzystanek")));
-                //rozklad.setGodzina_odjazdu(cursor.getString(cursor.getColumnIndex("godzina_odjazdu")));
-                //rozklad.setTyp_dnia(cursor.getString(cursor.getColumnIndex("typ_dnia")));
 
                 rozklad.setIdlinia_autobusowa(cursor.getInt(cursor.getColumnIndex("idlinia_autobusowa")));
                 rozklad.setPrzystanek_poczatkowy(getPrzystanekById(cursor.getString(cursor.getColumnIndex("przystanek_poczatkowy")), "przystanek_poczatkowy"));
@@ -273,38 +261,6 @@ public class Database extends SQLiteAssetHelper {
         return result;
     }
 
-/*
-    public List<String> getRozkladById()
-    {
-        SQLiteDatabase db = getReadableDatabase();
-        SQLiteQueryBuilder qb = new SQLiteQueryBuilder();
-
-        String tablePrzystanek="przystanek";
-        String tableRozklad="rozklad_jazdy";
-
-
-    }
-/*
-    public List<String> getRozkladByLinia()
-    {
-
-    }
-
-    public List<String> getRozkladByPrzystanek()
-    {
-
-    }
-
-    public List<String> getRozkladByGodzina()
-    {
-
-    }
-
-    public List<String> getTypDnia()
-    {
-
-    }
-*/
 
 public String getCurrentTimeUsingCalendar() {
     Calendar cal = Calendar.getInstance();
