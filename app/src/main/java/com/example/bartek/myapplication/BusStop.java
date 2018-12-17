@@ -50,7 +50,7 @@ public class BusStop extends AppCompatActivity {
 
         //loadSuggestList();
 
-        adapter = new BusAdapter(database.getRozklad2(nazwa_przystanku.getText().toString()), this);
+        adapter = new BusAdapter(database.getRozklad(nazwa_przystanku.getText().toString()), this);
         recyclerView.setAdapter(adapter);
 
         mBottomNav = (BottomNavigationView) findViewById(R.id.navigation);

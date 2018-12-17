@@ -8,6 +8,7 @@ import android.database.sqlite.SQLiteQueryBuilder;
 import com.example.bartek.myapplication.Model.Bus;
 import com.example.bartek.myapplication.Model.Przystanek;
 import com.example.bartek.myapplication.Model.Rozklad;
+import com.example.bartek.myapplication.Model.Wydarzenie;
 import com.readystatesoftware.sqliteasset.SQLiteAssetHelper;
 
 import java.text.DateFormat;
@@ -232,7 +233,7 @@ public class Database extends SQLiteAssetHelper {
 
 
 
-    public List<Rozklad> getRozklad2(String przystanek){
+    public List<Rozklad> getRozklad(String przystanek){
 
         SQLiteDatabase db = getReadableDatabase();
         SQLiteQueryBuilder qb = new SQLiteQueryBuilder();
@@ -259,6 +260,37 @@ public class Database extends SQLiteAssetHelper {
             } while (cursor.moveToNext());
         }
         return result;
+    }
+
+
+    public List<Wydarzenie> getEvent(String typ){
+
+        SQLiteDatabase db = getReadableDatabase();
+        SQLiteQueryBuilder qb = new SQLiteQueryBuilder();
+
+        String[] sqlSelect = {"idwydarzenie", "nazwa", "data", "miejsce", "typ_wydarzenia"};
+        String tableName = "wydarzenie";
+        String where = "typ_wydarzenia LIKE '"+typ+"'";
+
+        qb.setTables(tableName);
+        Cursor cursor = qb.query(db, sqlSelect, where, null, "data", null, null);
+        List<Wydarzenie> result = new ArrayList<>();
+        if(cursor.moveToFirst())
+        {
+            do{
+                Wydarzenie wydarzenie = new Wydarzenie();
+
+                wydarzenie.setIdwydarzenie(cursor.getInt(cursor.getColumnIndex("idwydarzenie")));
+                wydarzenie.setNazwa(cursor.getString(cursor.getColumnIndex("nazwa")));
+                wydarzenie.setData(cursor.getString(cursor.getColumnIndex("data")));
+                wydarzenie.setMiejsce(cursor.getString(cursor.getColumnIndex("miejsce")));
+                wydarzenie.setTyp_wydarzenia(cursor.getString(cursor.getColumnIndex("typ_wydarzenia")));
+
+                result.add(wydarzenie);
+            } while (cursor.moveToNext());
+        }
+        return result;
+
     }
 
 

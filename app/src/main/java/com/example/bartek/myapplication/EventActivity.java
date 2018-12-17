@@ -5,19 +5,34 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.example.bartek.myapplication.Adapter.EventAdapter;
+import com.example.bartek.myapplication.Database.Database;
+
 public class EventActivity extends AppCompatActivity {
+
+    RecyclerView recyclerView;
+    RecyclerView.LayoutManager layoutManager;
+    EventAdapter adapter;
+
+    Database database;
 
     private TextView tv1;
     private BottomNavigationView mBottomNav;
     private Spinner spinner;
 
+
+
     @Override
-    protected void onCreate(Bundle savedInstanceState)
+    protected void onCreate(final Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_events);
@@ -25,9 +40,36 @@ public class EventActivity extends AppCompatActivity {
         tv1 = (TextView)findViewById(R.id.tv1);
 
         spinner = (Spinner)findViewById(R.id.spinner);
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.wydarzenia, android.R.layout.simple_spinner_item);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner.setAdapter(adapter);
+        ArrayAdapter<CharSequence> arrayAdapter = ArrayAdapter.createFromResource(this, R.array.wydarzenia, android.R.layout.simple_spinner_item);
+        arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(arrayAdapter);
+
+        recyclerView = (RecyclerView)findViewById(R.id.recycler_event);
+        layoutManager = new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setHasFixedSize(true);
+
+        /*
+        database = new Database(this);
+
+        adapter = new EventAdapter(database.getEvent(spinner.getSelectedItem().toString()), this);
+        recyclerView.setAdapter(adapter);*/
+
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                database = new Database(view.getContext());
+
+                adapter = new EventAdapter(database.getEvent(spinner.getSelectedItem().toString()), view.getContext());
+                recyclerView.setAdapter(adapter);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+
 
         mBottomNav = (BottomNavigationView) findViewById(R.id.navigation);
         mBottomNav.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {

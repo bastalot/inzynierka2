@@ -5,8 +5,8 @@
     <string name="events_name">Eventy</string>
 
     <string-array name="wydarzenia">
-        <item>Koncerty</item>
-        <item>Imprezy</item>
+        <item>Koncert</item>
+        <item>Impreza</item>
         <item>Teatr</item>
         <item>Kino</item>
     </string-array>
