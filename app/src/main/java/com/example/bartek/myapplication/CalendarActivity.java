@@ -53,9 +53,10 @@ public class CalendarActivity extends AppCompatActivity {
         cv.setEventHandler(new CalendarView.EventHandler() {
             @Override
             public void onDayPress(Date date) {
-                DateFormat df = SimpleDateFormat.getDateInstance();
+                DateFormat df = new SimpleDateFormat("YYYY-MM-dd");
+                String formattedDate = df.format(date);
                 Intent monthtoday= new Intent(CalendarActivity.this, DayActivity.class);
-                monthtoday.putExtra("data", df.format(date));
+                monthtoday.putExtra("data", formattedDate);
                 startActivity(monthtoday);
             }
         });

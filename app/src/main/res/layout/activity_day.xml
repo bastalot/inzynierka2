@@ -3,11 +3,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".BusStop">
+    tools:context=".DayActivity">
 
 
     <TextView
-        android:id="@+id/nazwa_przystanku"
+        android:id="@+id/day_data"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="10 listopada 2018"
@@ -16,10 +16,10 @@
         android:textAllCaps="true"/>
 
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/recycler_bus_data"
+        android:id="@+id/recycler_day_data"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/nazwa_przystanku"/>
+        android:layout_below="@id/day_data"/>
 
     <Button
         android:id="@+id/dodaj_notatke"

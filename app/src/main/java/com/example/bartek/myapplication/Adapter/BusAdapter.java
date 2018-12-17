@@ -13,7 +13,7 @@ import com.example.bartek.myapplication.R;
 
 import java.util.List;
 
-class BusViewHolder extends RecyclerView.ViewHolder{
+class  BusViewHolder extends RecyclerView.ViewHolder{
 
     public View view;
     public TextView idlinia_autobusowa, przystanek_poczatkowy, przystanek_koncowy, godzina_odjazdu;

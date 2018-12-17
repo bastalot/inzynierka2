@@ -5,24 +5,70 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
+
+import com.example.bartek.myapplication.Adapter.BusAdapter;
+import com.example.bartek.myapplication.Adapter.DayAdapter;
+import com.example.bartek.myapplication.Database.Database;
 
 public class DayActivity extends AppCompatActivity {
 
     private BottomNavigationView mBottomNav;
+    DayAdapter adapter;
+    private TextView data;
+    private Button addNote;
+    private RecyclerView recyclerView;
+    RecyclerView.LayoutManager layoutManager;
 
-    TextView data;
+    Database database;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_day);
 
-        data = (TextView)findViewById(R.id.nazwa_przystanku);
+
+
+
+
+        data = (TextView)findViewById(R.id.day_data);
 
         Bundle bundle = getIntent().getExtras();
         data.setText(bundle.getString("data"));
+
+        recyclerView = (RecyclerView)findViewById(R.id.recycler_day_data);
+        layoutManager = new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setHasFixedSize(true);
+
+
+        adapter = new DayAdapter(database.getNotatka(data.getText().toString()), this);
+        recyclerView.setAdapter(adapter);
+
+
+
+
+        addNote = (Button)findViewById(R.id.dodaj_notatke);
+
+        addNote.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            Intent dayToNote = new Intent(DayActivity.this, NoteActivity.class);
+            startActivity(dayToNote);
+
+
+
+            }
+        });
+
+
 
         mBottomNav = (BottomNavigationView)findViewById(R.id.navigation);
         mBottomNav.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -34,6 +80,8 @@ public class DayActivity extends AppCompatActivity {
         });
 
     }
+
+
 
 
     private void selectFragment(MenuItem item) {
