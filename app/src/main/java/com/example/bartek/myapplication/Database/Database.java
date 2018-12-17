@@ -364,7 +364,10 @@ closeDB();*/
 
         String[] sqlSelect = {"idnotatka", "data", "text"};
         String tableName = "notatka";
-        //String where = "typ_wydarzenia LIKE '"+typ+"'";
+
+        String[] strings = dzien.split("\\s+");
+
+        String where = "data LIKE '"+strings[0]+"'";
 
         qb.setTables(tableName);
         Cursor cursor = qb.query(db, sqlSelect, where, null, "data", null, null);
