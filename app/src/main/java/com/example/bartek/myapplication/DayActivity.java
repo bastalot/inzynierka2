@@ -19,7 +19,7 @@ public class DayActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_day);
 
-        data = (TextView)findViewById(R.id.day_data);
+        data = (TextView)findViewById(R.id.nazwa_przystanku);
 
         Bundle bundle = getIntent().getExtras();
         data.setText(bundle.getString("data"));

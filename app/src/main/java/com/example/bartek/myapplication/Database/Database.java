@@ -1,11 +1,15 @@
 package com.example.bartek.myapplication.Database;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
+import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteQueryBuilder;
+import android.util.Log;
 
 import com.example.bartek.myapplication.Model.Bus;
+import com.example.bartek.myapplication.Model.Notatka;
 import com.example.bartek.myapplication.Model.Przystanek;
 import com.example.bartek.myapplication.Model.Rozklad;
 import com.example.bartek.myapplication.Model.Wydarzenie;
@@ -26,6 +30,12 @@ public class Database extends SQLiteAssetHelper {
 
     public Database(Context context) {
         super(context, DB_NAME, null, DB_VER);
+    }
+
+
+    @Override
+    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+        super.onUpgrade(db, oldVersion, newVersion);
     }
 
     //function get all przystanki
@@ -287,6 +297,88 @@ public class Database extends SQLiteAssetHelper {
                 wydarzenie.setTyp_wydarzenia(cursor.getString(cursor.getColumnIndex("typ_wydarzenia")));
 
                 result.add(wydarzenie);
+            } while (cursor.moveToNext());
+        }
+        return result;
+
+    }
+
+    public boolean setNotatkaEvent(String data, String text){
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        SQLiteDatabase db1 = getReadableDatabase();
+
+        SQLiteQueryBuilder qb = new SQLiteQueryBuilder();
+        qb.setTables("notatka");
+        Cursor cursor = qb.query(db1, new String[]{"idnotatka"}, null, null,null,null, null);
+        int id = 0;
+        if(cursor.moveToLast())
+        {
+            id = cursor.getInt(cursor.getColumnIndex("idnotatka")) + 1;
+        }
+
+
+
+
+        ContentValues cv = new ContentValues();
+        cv.put("idnotatka", id);
+        cv.put("data", data);
+        cv.put("text", text);
+
+
+
+        long result = db.insert("notatka", null, cv);
+        db.close();
+
+        if (result == -1) {
+            return false;
+        } else return true;
+
+
+        //qb.setTables("notatka");
+        //Cursor cursor;
+        //cursor.
+
+
+
+
+        /*ContentValues cv = new ContentValues();
+        //cv.put("idnotatka", id);
+        cv.put("data", data);
+        cv.put("text", text);
+        db.insert("notatka",null, cv);
+
+        /*openDB();
+ContentValues cv = new ContentValues();
+cv.put("column1", valuel);
+cv.put("column2", value2);//and so on...
+db.insert(TABLE_NAME, null, cv);
+closeDB();*/
+
+    }
+
+    public List<Notatka> getNotatka(String dzien){
+
+        SQLiteDatabase db = getReadableDatabase();
+        SQLiteQueryBuilder qb = new SQLiteQueryBuilder();
+
+        String[] sqlSelect = {"idnotatka", "data", "text"};
+        String tableName = "notatka";
+        //String where = "typ_wydarzenia LIKE '"+typ+"'";
+
+        qb.setTables(tableName);
+        Cursor cursor = qb.query(db, sqlSelect, where, null, "data", null, null);
+        List<Notatka> result = new ArrayList<>();
+        if(cursor.moveToFirst())
+        {
+            do{
+                Notatka notatka = new Notatka();
+
+                notatka.setIdnotatka(cursor.getInt(cursor.getColumnIndex("idnotatka")));
+                notatka.setData(cursor.getString(cursor.getColumnIndex("data")));
+                notatka.setText(cursor.getString(cursor.getColumnIndex("text")));
+
+                result.add(notatka);
             } while (cursor.moveToNext());
         }
         return result;

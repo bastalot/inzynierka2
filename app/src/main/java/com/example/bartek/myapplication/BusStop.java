@@ -38,7 +38,7 @@ public class BusStop extends AppCompatActivity {
         setContentView(R.layout.activity_busstop);
 
         Bundle bundle = getIntent().getExtras();
-        nazwa_przystanku = (TextView)findViewById(R.id.day_data);
+        nazwa_przystanku = (TextView)findViewById(R.id.nazwa_przystanku);
         nazwa_przystanku.setText(bundle.getString("nazwa"));
 
         recyclerView = (RecyclerView)findViewById(R.id.recycler_bus);

@@ -20,7 +20,7 @@
         android:id="@+id/recycler_bus"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/day_data"/>
+        android:layout_below="@id/nazwa_przystanku"/>
 
 
 

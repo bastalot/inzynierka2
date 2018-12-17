@@ -1,17 +1,17 @@
 package com.example.bartek.myapplication.Model;
 
-public class Dzien {
+public class Notatka {
 
     public int idnotatka;
     public String data, text;
 
-    public Dzien(int idnotatka, String data, String text) {
+    public Notatka(int idnotatka, String data, String text) {
         this.idnotatka = idnotatka;
         this.data = data;
         this.text = text;
     }
 
-    public Dzien() {
+    public Notatka() {
     }
 
     public void setIdnotatka(int idnotatka) {
