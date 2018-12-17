@@ -25,25 +25,25 @@ import java.util.HashSet;
 
 public class CalendarView extends LinearLayout
 {
-    // for logging
+
     private static final String LOGTAG = "Calendar View";
 
-    // how many days to show, defaults to six weeks, 42 days
+
     private static final int DAYS_COUNT = 42;
 
-    // default date format
+
     private static final String DATE_FORMAT = "MMM yyyy";
 
-    // date format
+
     private String dateFormat;
 
-    // current displayed month
+
     private Calendar currentDate = Calendar.getInstance();
 
-    //event handling
+
     private EventHandler eventHandler = null;
 
-    // internal components
+
     private LinearLayout header;
     private ImageView btnPrev;
     private ImageView btnNext;
@@ -61,7 +61,7 @@ public class CalendarView extends LinearLayout
             R.color.spring
     };
 
-    // month-season association (northern hemisphere, sorry australia :)
+
     int[] monthSeason = new int[] {2, 2, 3, 3, 3, 0, 0, 0, 1, 1, 1, 2};
 
     public CalendarView(Context context)
@@ -73,6 +73,8 @@ public class CalendarView extends LinearLayout
     {
         super(context, attrs);
         initControl(context, attrs);
+
+
     }
 
     public CalendarView(Context context, AttributeSet attrs, int defStyleAttr)
@@ -81,9 +83,6 @@ public class CalendarView extends LinearLayout
         initControl(context, attrs);
     }
 
-    /**
-     * Load control xml layout
-     */
     private void initControl(Context context, AttributeSet attrs)
     {
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -102,7 +101,7 @@ public class CalendarView extends LinearLayout
 
         try
         {
-            // try to load provided date format, and fallback to default otherwise
+
             dateFormat = ta.getString(R.styleable.CalendarView_dateFormat);
             if (dateFormat == null)
                 dateFormat = DATE_FORMAT;
@@ -114,7 +113,7 @@ public class CalendarView extends LinearLayout
     }
     private void assignUiElements()
     {
-        // layout is inflated, assign local variables to components
+
         header = (LinearLayout)findViewById(R.id.calendar_header);
         btnPrev = (ImageView)findViewById(R.id.prev_month);
         btnNext = (ImageView)findViewById(R.id.next_month);
@@ -126,7 +125,7 @@ public class CalendarView extends LinearLayout
 
     private void assignClickHandlers()
     {
-        // add one month and refresh UI
+
         btnNext.setOnClickListener(new OnClickListener()
         {
             @Override
@@ -137,7 +136,7 @@ public class CalendarView extends LinearLayout
             }
         });
 
-        // subtract one month and refresh UI
+
         btnPrev.setOnClickListener(new OnClickListener()
         {
             @Override
@@ -148,18 +147,30 @@ public class CalendarView extends LinearLayout
             }
         });
 
-        // long-pressing a day
+
+        grid.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
+
+
+                eventHandler.onDayPress((Date)adapterView.getItemAtPosition(position));
+
+
+
+            }
+        });
+
         grid.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener()
         {
 
             @Override
             public boolean onItemLongClick(AdapterView<?> view, View cell, int position, long id)
             {
-                // handle long-press
+
                 if (eventHandler == null)
                     return false;
 
-                eventHandler.onDayLongPress((Date)view.getItemAtPosition(position));
+                eventHandler.onDayPress((Date)view.getItemAtPosition(position));
                 return true;
             }
         });
@@ -190,14 +201,14 @@ public class CalendarView extends LinearLayout
             calendar.add(Calendar.DAY_OF_MONTH, 1);
         }
 
-        // update grid
+
         grid.setAdapter(new CalendarAdapter(getContext(), cells, events));
 
-        // update title
+
         SimpleDateFormat sdf = new SimpleDateFormat(dateFormat);
         txtDate.setText(sdf.format(currentDate.getTime()));
 
-        // set header color according to current season
+
         int month = currentDate.get(Calendar.MONTH);
         int season = monthSeason[month];
         int color = rainbow[season];
@@ -224,44 +235,28 @@ public class CalendarView extends LinearLayout
         @Override
         public View getView(int position, View view, ViewGroup parent)
         {
-            // day in question
+
             Date date = getItem(position);
             int day = date.getDate();
             int month = date.getMonth();
             int year = date.getYear();
 
-            // today
+
             Date today = new Date();
 
-            // inflate item if it does not exist yet
+
             if (view == null)
                 view = inflater.inflate(R.layout.layout_calendar_item, parent, false);
 
-            /* if this day has an event, specify event image
-            view.setBackgroundResource(0);
 
-            if (eventDays != null)
-            {
-                for (Date eventDate : eventDays)
-                {
-                    if (eventDate.getDate() == day &&
-                            eventDate.getMonth() == month &&
-                            eventDate.getYear() == year)
-                    {
-                        // mark this day for event
-                        view.setBackgroundResource(R.drawable.reminder);
-                        break;
-                    }
-                }
-            } */
 
-            // clear styling
+
             ((TextView)view).setTypeface(null, Typeface.NORMAL);
             ((TextView)view).setTextColor(Color.BLACK);
 
             if (month != currentDate.getTime().getMonth() || year != currentDate.getTime().getYear())
             {
-                // if this day is outside current month, grey it out
+
                 ((TextView)view).setTextColor(getResources().getColor(R.color.greyed_out));
             }
             else if (month == today.getMonth() && year == today.getYear() && day == today.getDate())
@@ -278,21 +273,17 @@ public class CalendarView extends LinearLayout
         }
     }
 
-    /**
-     * Assign event handler to be passed needed events
-     */
+
     public void setEventHandler(EventHandler eventHandler)
     {
         this.eventHandler = eventHandler;
     }
 
-    /**
-     * This interface defines what events to be reported to
-     * the outside world
-     */
+
+
     public interface EventHandler
     {
-        void onDayLongPress(Date date);
+        void onDayPress(Date date);
     }
 
 

@@ -39,8 +39,7 @@ public class CalendarActivity extends AppCompatActivity {
         CalendarView cv = ((CalendarView)findViewById(R.id.calendar_view));
         cv.updateCalendar(events);
 
-        //tv_events = (TextView)findViewById(R.id.event_menu);
-        //tv_bus = (TextView)findViewById(R.id.bus_menu);
+
 
         mBottomNav = (BottomNavigationView) findViewById(R.id.navigation);
         mBottomNav.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -51,29 +50,29 @@ public class CalendarActivity extends AppCompatActivity {
             }
         });
 
-        // assign event handler
-        cv.setEventHandler(new CalendarView.EventHandler()
-        {
+        cv.setEventHandler(new CalendarView.EventHandler() {
             @Override
-            public void onDayLongPress(Date date)
-            {
-                // show returned day
+            public void onDayPress(Date date) {
                 DateFormat df = SimpleDateFormat.getDateInstance();
-                Toast.makeText(CalendarActivity.this,  df.format(date), Toast.LENGTH_SHORT).show();
+                Intent monthtoday= new Intent(CalendarActivity.this, DayActivity.class);
+                monthtoday.putExtra("data", df.format(date));
+                startActivity(monthtoday);
             }
         });
 
-        /*tv_bus.setOnClickListener(new View.OnClickListener() {
+        // assign event handler
+        /*cv.setEventHandler(new CalendarView.EventHandler()
+        {
             @Override
-            public void onClick(View view) {
+            public void onDayPress(Date date)
+            {
 
-                Intent intentBus = new Intent(CalendarActivity.this, BusActivity.class);
-                startActivity(intentBus);
-
-
-
+                DateFormat df = SimpleDateFormat.getDateInstance();
+                Toast.makeText(CalendarActivity.this,  df.format(date), Toast.LENGTH_SHORT).show();
             }
-        });*/
+        }); */
+
+
 
     }
 
