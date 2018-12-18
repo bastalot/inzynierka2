@@ -8,7 +8,6 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.bartek.myapplication.Model.Notatka;
-import com.example.bartek.myapplication.Model.Wydarzenie;
 import com.example.bartek.myapplication.R;
 
 import java.util.List;
@@ -27,11 +26,11 @@ class DayViewHolder extends RecyclerView.ViewHolder {
 
 public class DayAdapter extends  RecyclerView.Adapter<DayViewHolder>{
 
-    private List<Notatka> text;
+    private List<Notatka> notatka;
     private Context context;
 
-    public DayAdapter(List<Notatka> text, Context context) {
-        this.text = text;
+    public DayAdapter(List<Notatka> notatka, Context context) {
+        this.notatka = notatka;
         this.context = context;
     }
 
@@ -45,15 +44,15 @@ public class DayAdapter extends  RecyclerView.Adapter<DayViewHolder>{
     @Override
     public void onBindViewHolder(DayViewHolder holder, int position) {
 
-        holder.data_note.setText(text.get(position).getData());
-        holder.text.setText(text.get(position).getText());
+        holder.data_note.setText(notatka.get(position).getData());
+        holder.text.setText(notatka.get(position).getText());
     }
 
 
 
     @Override
     public int getItemCount() {
-        return text.size();
+        return notatka.size();
     }
 
 

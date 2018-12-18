@@ -100,6 +100,7 @@ public class EventActivity extends AppCompatActivity {
         });
     }
 
+    /*
     public void addData(String data, String text){
         boolean insertData = database.setNotatkaEvent(data,text);
         
@@ -110,7 +111,7 @@ public class EventActivity extends AppCompatActivity {
         } else {
             Toast.makeText(this, "nie dziala elo", Toast.LENGTH_SHORT).show();
         }
-    }
+    }*/
 
 
     private void selectFragment(MenuItem item) {

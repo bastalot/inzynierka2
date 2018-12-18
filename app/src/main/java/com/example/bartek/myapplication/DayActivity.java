@@ -1,5 +1,6 @@
 package com.example.bartek.myapplication;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -19,20 +20,20 @@ import com.example.bartek.myapplication.Database.Database;
 public class DayActivity extends AppCompatActivity {
 
     private BottomNavigationView mBottomNav;
-    DayAdapter adapter;
+    private DayAdapter adapter;
     private TextView data;
     private Button addNote;
     private RecyclerView recyclerView;
-    RecyclerView.LayoutManager layoutManager;
+    private RecyclerView.LayoutManager layoutManager;
 
-    Database database;
+    private Database database;
+
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_day);
-
 
 
 
@@ -47,6 +48,7 @@ public class DayActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setHasFixedSize(true);
 
+        database = new Database(this);
 
         adapter = new DayAdapter(database.getNotatka(data.getText().toString()), this);
         recyclerView.setAdapter(adapter);
@@ -61,6 +63,7 @@ public class DayActivity extends AppCompatActivity {
             public void onClick(View view) {
 
             Intent dayToNote = new Intent(DayActivity.this, NoteActivity.class);
+            dayToNote.putExtra("dzien", data.getText().toString());
             startActivity(dayToNote);
 
 

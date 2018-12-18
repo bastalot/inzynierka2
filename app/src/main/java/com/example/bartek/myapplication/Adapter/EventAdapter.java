@@ -39,9 +39,9 @@ class EventViewHolder extends RecyclerView.ViewHolder{
                 boolean insertData = database.setNotatkaEvent(data.getText().toString(), wydarzenie.getText().toString());
 
                 if(insertData) {
-                    Toast.makeText(view.getContext(), "działa elo", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(view.getContext(), "Dodano do kalendarza", Toast.LENGTH_SHORT).show();
                 } else {
-                    Toast.makeText(view.getContext(), "nie dziala elo", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(view.getContext(), "Nie można dodać do kalendarza", Toast.LENGTH_SHORT).show();
                 }
 
                 //EventActivity eventActivity = new EventActivity();

@@ -317,13 +317,15 @@ public class Database extends SQLiteAssetHelper {
             id = cursor.getInt(cursor.getColumnIndex("idnotatka")) + 1;
         }
 
+        String[] splited = data.split("\\s+");
 
-
+        String notatka = text+" godz. "+splited[1];
 
         ContentValues cv = new ContentValues();
         cv.put("idnotatka", id);
-        cv.put("data", data);
-        cv.put("text", text);
+        cv.put("data", splited[0]);
+        cv.put("text", notatka);
+        cv.put("godzina", splited[1]);
 
 
 
@@ -334,43 +336,21 @@ public class Database extends SQLiteAssetHelper {
             return false;
         } else return true;
 
-
-        //qb.setTables("notatka");
-        //Cursor cursor;
-        //cursor.
-
-
-
-
-        /*ContentValues cv = new ContentValues();
-        //cv.put("idnotatka", id);
-        cv.put("data", data);
-        cv.put("text", text);
-        db.insert("notatka",null, cv);
-
-        /*openDB();
-ContentValues cv = new ContentValues();
-cv.put("column1", valuel);
-cv.put("column2", value2);//and so on...
-db.insert(TABLE_NAME, null, cv);
-closeDB();*/
-
     }
+
 
     public List<Notatka> getNotatka(String dzien){
 
         SQLiteDatabase db = getReadableDatabase();
         SQLiteQueryBuilder qb = new SQLiteQueryBuilder();
 
-        String[] sqlSelect = {"idnotatka", "data", "text"};
+        String[] sqlSelect = {"idnotatka", "data", "text", "godzina"};
         String tableName = "notatka";
 
-        String[] strings = dzien.split("\\s+");
-
-        String where = "data LIKE '"+strings[0]+"'";
+        String where = "data='"+dzien+"'";
 
         qb.setTables(tableName);
-        Cursor cursor = qb.query(db, sqlSelect, where, null, "data", null, null);
+        Cursor cursor = qb.query(db, sqlSelect, where, null, "godzina", null, null);
         List<Notatka> result = new ArrayList<>();
         if(cursor.moveToFirst())
         {
@@ -380,6 +360,7 @@ closeDB();*/
                 notatka.setIdnotatka(cursor.getInt(cursor.getColumnIndex("idnotatka")));
                 notatka.setData(cursor.getString(cursor.getColumnIndex("data")));
                 notatka.setText(cursor.getString(cursor.getColumnIndex("text")));
+                notatka.setGodzina(cursor.getString(cursor.getColumnIndex("godzina")));
 
                 result.add(notatka);
             } while (cursor.moveToNext());

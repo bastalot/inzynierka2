@@ -10,6 +10,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.bartek.myapplication.Database.Database;
+
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.regex.Pattern;
@@ -19,6 +21,7 @@ public class NoteActivity extends AppCompatActivity {
     EditText notka;
     EditText godzina;
     Button save_note;
+    String dzien;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +31,10 @@ public class NoteActivity extends AppCompatActivity {
         notka = (EditText)findViewById(R.id.input_note);
         godzina = (EditText)findViewById(R.id.godzina_note);
         save_note = (Button)findViewById(R.id.zapisz_note);
+        Bundle bundle = getIntent().getExtras();
+        dzien = bundle.getString("dzien");
+
+        final Database database = new Database(this);
 
 
 
@@ -73,7 +80,8 @@ public class NoteActivity extends AppCompatActivity {
 
                     Toast.makeText(NoteActivity.this, "Wszystko ok", Toast.LENGTH_SHORT).show();
 
-
+                    String data = dzien+" "+godzina.getText().toString();
+                    boolean insertData = database.setNotatkaEvent(data, notka.getText().toString());
 
                     finish();
 
