@@ -1,6 +1,5 @@
 package com.example.bartek.myapplication.Adapter;
 
-
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
@@ -15,16 +14,14 @@ import com.example.bartek.myapplication.R;
 
 import java.util.List;
 
-class SearchViewHolder extends RecyclerView.ViewHolder{
+class SearchViewHolder extends RecyclerView.ViewHolder {
 
     public View view;
     public TextView nazwa_przystanku;
 
-
-
     public SearchViewHolder(final View itemView) {
         super(itemView);
-        nazwa_przystanku = (TextView)itemView.findViewById(R.id.nazwa_przystanku);
+        nazwa_przystanku = (TextView) itemView.findViewById(R.id.nazwa_przystanku);
 
         itemView.getContext();
         view = itemView;
@@ -37,8 +34,6 @@ class SearchViewHolder extends RecyclerView.ViewHolder{
             }
         });
     }
-
-
 }
 
 public class SearchAdapter extends RecyclerView.Adapter<SearchViewHolder> {
@@ -54,7 +49,7 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchViewHolder> {
     @Override
     public SearchViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-        View itemView = inflater.inflate(R.layout.layout_item,parent,false);
+        View itemView = inflater.inflate(R.layout.layout_item, parent, false);
         return new SearchViewHolder(itemView);
     }
 

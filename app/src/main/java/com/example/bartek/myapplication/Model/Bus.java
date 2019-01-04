@@ -2,9 +2,8 @@ package com.example.bartek.myapplication.Model;
 
 public class Bus {
 
-    public int idlinia_autobusowa;//, przystanek_poczatkowy, przystanek_koncowy;
+    public int idlinia_autobusowa;
     public String przystanek_poczatkowy, przystanek_koncowy;
-    //sprobowac zamienic na string
 
     public Bus(int idlinia_autobusowa, String przystanek_poczatkowy, String przystanek_koncowy) {
         this.idlinia_autobusowa = idlinia_autobusowa;

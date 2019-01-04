@@ -1,11 +1,11 @@
 package com.example.bartek.myapplication.Model;
 
 public class Wydarzenie {
-
     public int idwydarzenie;
     public String nazwa, data, miejsce, typ_wydarzenia;
 
-    public Wydarzenie(int idwydarzenie, String nazwa, String data, String miejsce, String typ_wydarzenia) {
+    public Wydarzenie(int idwydarzenie, String nazwa, String data, String miejsce,
+                      String typ_wydarzenia) {
         this.idwydarzenie = idwydarzenie;
         this.nazwa = nazwa;
         this.data = data;

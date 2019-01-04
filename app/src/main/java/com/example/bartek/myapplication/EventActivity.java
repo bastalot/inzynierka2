@@ -24,14 +24,12 @@ public class EventActivity extends AppCompatActivity {
     RecyclerView recyclerView;
     RecyclerView.LayoutManager layoutManager;
     EventAdapter adapter;
-
     Database database;
 
     private TextView tv1;
     private BottomNavigationView mBottomNav;
     private Spinner spinner;
     private ImageView iv1;
-
 
     @Override
     protected void onCreate(final Bundle savedInstanceState)
@@ -41,54 +39,30 @@ public class EventActivity extends AppCompatActivity {
 
         tv1 = (TextView)findViewById(R.id.tv1);
         iv1 = (ImageView)findViewById(R.id.iv1);
-
         spinner = (Spinner)findViewById(R.id.spinner);
-        ArrayAdapter<CharSequence> arrayAdapter = ArrayAdapter.createFromResource(this, R.array.wydarzenia, android.R.layout.simple_spinner_item);
+        ArrayAdapter<CharSequence> arrayAdapter = ArrayAdapter.createFromResource(this,
+                R.array.wydarzenia, android.R.layout.simple_spinner_item);
         arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(arrayAdapter);
-
-
 
         recyclerView = (RecyclerView)findViewById(R.id.recycler_event);
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setHasFixedSize(true);
 
-        /*iv1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Database database = new Database(view.getContext());
-                boolean insertData = database.setNotatkaEvent(data.getText().toString(), wydarzenie.getText().toString());
-
-                if(insertData) {
-                    Toast.makeText(view.getContext(), "działa elo", Toast.LENGTH_SHORT).show();
-                } else {
-                    Toast.makeText(view.getContext(), "nie dziala elo", Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
-
-        /*
-        database = new Database(this);
-
-        adapter = new EventAdapter(database.getEvent(spinner.getSelectedItem().toString()), this);
-        recyclerView.setAdapter(adapter);*/
-
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 database = new Database(view.getContext());
 
-                adapter = new EventAdapter(database.getEvent(spinner.getSelectedItem().toString()), view.getContext());
+                adapter = new EventAdapter(database.getEvent(spinner.getSelectedItem().toString()),
+                        view.getContext());
                 recyclerView.setAdapter(adapter);
             }
-
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
-
             }
         });
-
 
         mBottomNav = (BottomNavigationView) findViewById(R.id.navigation);
         mBottomNav.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -100,22 +74,7 @@ public class EventActivity extends AppCompatActivity {
         });
     }
 
-    /*
-    public void addData(String data, String text){
-        boolean insertData = database.setNotatkaEvent(data,text);
-        
-        
-        
-        if(insertData) {
-            Toast.makeText(this, "działa elo", Toast.LENGTH_SHORT).show();
-        } else {
-            Toast.makeText(this, "nie dziala elo", Toast.LENGTH_SHORT).show();
-        }
-    }*/
-
-
     private void selectFragment(MenuItem item) {
-
         switch (item.getItemId()) {
             case R.id.menu_cal:
                 Intent intent = new Intent(this, CalendarActivity.class);
@@ -126,10 +85,7 @@ public class EventActivity extends AppCompatActivity {
                 startActivity(intent1);
                 break;
             case R.id.menu_events:
-                //Intent intent2 = new Intent(this, EventActivity.class);
-                //startActivity(intent2);
                 break;
-
         }
     }
 }

@@ -31,7 +31,6 @@ class  BusViewHolder extends RecyclerView.ViewHolder{
 
 public class BusAdapter extends RecyclerView.Adapter<BusViewHolder>{
 
-    //private List<Bus> bus;
     private List<Rozklad> rozklad;
     private Context context;
 
@@ -49,7 +48,8 @@ public class BusAdapter extends RecyclerView.Adapter<BusViewHolder>{
 
     @Override
     public void onBindViewHolder(BusViewHolder holder, int position) {
-        holder.idlinia_autobusowa.setText(Integer.toString(rozklad.get(position).getIdlinia_autobusowa()));
+        holder.idlinia_autobusowa.setText(Integer.toString(rozklad.get(position)
+                .getIdlinia_autobusowa()));
         holder.przystanek_poczatkowy.setText(rozklad.get(position).getPrzystanek_poczatkowy());
         holder.przystanek_koncowy.setText(rozklad.get(position).getPrzystanek_koncowy());
         holder.godzina_odjazdu.setText(rozklad.get(position).getGodzina_odjazdu());

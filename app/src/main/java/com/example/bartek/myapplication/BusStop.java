@@ -1,5 +1,4 @@
 package com.example.bartek.myapplication;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -23,14 +22,9 @@ public class BusStop extends AppCompatActivity {
     RecyclerView.LayoutManager layoutManager;
     BusAdapter adapter;
     TextView nazwa_przystanku;
-
     List<String> suggestList = new ArrayList<>();
-
-
     Database database;
-
     private BottomNavigationView mBottomNav;
-    
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -38,19 +32,17 @@ public class BusStop extends AppCompatActivity {
         setContentView(R.layout.activity_busstop);
 
         Bundle bundle = getIntent().getExtras();
-        nazwa_przystanku = (TextView)findViewById(R.id.nazwa_przystanku);
+        nazwa_przystanku = (TextView) findViewById(R.id.nazwa_przystanku);
         nazwa_przystanku.setText(bundle.getString("nazwa"));
 
-        recyclerView = (RecyclerView)findViewById(R.id.recycler_bus);
+        recyclerView = (RecyclerView) findViewById(R.id.recycler_bus);
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setHasFixedSize(true);
 
         database = new Database(this);
-
-        //loadSuggestList();
-
-        adapter = new BusAdapter(database.getRozklad(nazwa_przystanku.getText().toString()), this);
+        adapter = new BusAdapter(database.getRozklad(nazwa_przystanku.getText().toString()),
+                this);
         recyclerView.setAdapter(adapter);
 
         mBottomNav = (BottomNavigationView) findViewById(R.id.navigation);
@@ -81,11 +73,4 @@ public class BusStop extends AppCompatActivity {
 
         }
     }
-
-    /*
-    private void loadSuggestList(){
-        suggestList = database.getBusNumbers();
-
-    }*/
-
 }

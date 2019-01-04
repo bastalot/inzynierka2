@@ -4,7 +4,8 @@ public class Rozklad extends Bus {
 
     public String godzina_odjazdu, idprzystanek;
 
-    public Rozklad(int idlinia_autobusowa, String przystanek_poczatkowy, String przystanek_koncowy, String godzina_odjazdu, String idprzystanek) {
+    public Rozklad(int idlinia_autobusowa, String przystanek_poczatkowy, String przystanek_koncowy,
+                   String godzina_odjazdu, String idprzystanek) {
         super(idlinia_autobusowa, przystanek_poczatkowy, przystanek_koncowy);
         this.godzina_odjazdu = godzina_odjazdu;
         this.idprzystanek = idprzystanek;

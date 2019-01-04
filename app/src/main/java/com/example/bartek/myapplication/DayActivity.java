@@ -1,6 +1,5 @@
 package com.example.bartek.myapplication;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -13,7 +12,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.example.bartek.myapplication.Adapter.BusAdapter;
 import com.example.bartek.myapplication.Adapter.DayAdapter;
 import com.example.bartek.myapplication.Database.Database;
 
@@ -28,67 +26,48 @@ public class DayActivity extends AppCompatActivity {
 
     private Database database;
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_day);
 
-
-
-
-        data = (TextView)findViewById(R.id.day_data);
+        data = (TextView) findViewById(R.id.day_data);
 
         Bundle bundle = getIntent().getExtras();
         data.setText(bundle.getString("data"));
 
-        recyclerView = (RecyclerView)findViewById(R.id.recycler_day_data);
+        recyclerView = (RecyclerView) findViewById(R.id.recycler_day_data);
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setHasFixedSize(true);
-
         database = new Database(this);
 
         adapter = new DayAdapter(database.getNotatka(data.getText().toString()), this);
         recyclerView.setAdapter(adapter);
 
-
-
-
-        addNote = (Button)findViewById(R.id.dodaj_notatke);
+        addNote = (Button) findViewById(R.id.dodaj_notatke);
 
         addNote.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-            Intent dayToNote = new Intent(DayActivity.this, NoteActivity.class);
-            dayToNote.putExtra("dzien", data.getText().toString());
-            startActivity(dayToNote);
-
-
-
+                Intent dayToNote = new Intent(DayActivity.this, NoteActivity.class);
+                dayToNote.putExtra("dzien", data.getText().toString());
+                startActivity(dayToNote);
             }
         });
 
-
-
-        mBottomNav = (BottomNavigationView)findViewById(R.id.navigation);
-        mBottomNav.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+        mBottomNav = (BottomNavigationView) findViewById(R.id.navigation);
+        mBottomNav.setOnNavigationItemSelectedListener(new BottomNavigationView
+                .OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 selectFragment(item);
                 return true;
             }
         });
-
     }
 
-
-
-
     private void selectFragment(MenuItem item) {
-
         switch (item.getItemId()) {
             case R.id.menu_cal:
                 Intent intent = new Intent(this, CalendarActivity.class);
@@ -102,10 +81,6 @@ public class DayActivity extends AppCompatActivity {
                 Intent intent2 = new Intent(this, EventActivity.class);
                 startActivity(intent2);
                 break;
-
         }
     }
-
-
-
 }

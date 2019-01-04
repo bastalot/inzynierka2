@@ -27,7 +27,7 @@ public class Notatka {
         this.text = text;
     }
 
-    public void setGodzina(String godzina){
+    public void setGodzina(String godzina) {
         this.godzina = godzina;
     }
 

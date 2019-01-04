@@ -37,12 +37,12 @@ public class BusActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bus);
 
-        recyclerView = (RecyclerView)findViewById(R.id.recycler_search);
+        recyclerView = (RecyclerView) findViewById(R.id.recycler_search);
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setHasFixedSize(true);
 
-        materialSearchBar = (MaterialSearchBar)findViewById(R.id.search_bar);
+        materialSearchBar = (MaterialSearchBar) findViewById(R.id.search_bar);
 
         database = new Database(this);
 
@@ -59,9 +59,8 @@ public class BusActivity extends AppCompatActivity {
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
                 List<String> suggest = new ArrayList<>();
-                for(String search:suggestList)
-                {
-                    if(search.toLowerCase().contains(materialSearchBar.getText().toLowerCase()))
+                for (String search : suggestList) {
+                    if (search.toLowerCase().contains(materialSearchBar.getText().toLowerCase()))
                         suggest.add(search);
                 }
                 materialSearchBar.setLastSuggestions(suggest);
@@ -75,8 +74,7 @@ public class BusActivity extends AppCompatActivity {
         materialSearchBar.setOnSearchActionListener(new MaterialSearchBar.OnSearchActionListener() {
             @Override
             public void onSearchStateChanged(boolean enabled) {
-                if(!enabled)
-                {
+                if (!enabled) {
                     adapter = new SearchAdapter(getBaseContext(), database.getPrzystanek());
                     recyclerView.setAdapter(adapter);
                 }
@@ -126,8 +124,6 @@ public class BusActivity extends AppCompatActivity {
                 startActivity(intent);
                 break;
             case R.id.menu_bus:
-                //Intent intent1 = new Intent(this, BusActivity.class);
-                //startActivity(intent1);
                 break;
             case R.id.menu_events:
                 Intent intent2 = new Intent(this, EventActivity.class);

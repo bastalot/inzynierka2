@@ -48,16 +48,9 @@ public class DayAdapter extends  RecyclerView.Adapter<DayViewHolder>{
         holder.text.setText(notatka.get(position).getText());
     }
 
-
-
     @Override
     public int getItemCount() {
         return notatka.size();
     }
-
-
-
-
-
 }
 
