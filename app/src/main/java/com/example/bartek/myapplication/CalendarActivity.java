@@ -19,6 +19,7 @@ import java.util.HashSet;
 
 public class CalendarActivity extends AppCompatActivity {
 
+
     private BottomNavigationView mBottomNav;
 
     @Override
@@ -26,15 +27,11 @@ public class CalendarActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_calendar);
 
-        HashSet<Date> events = new HashSet<>();
-        events.add(new Date());
-
         CalendarView cv = ((CalendarView) findViewById(R.id.calendar_view));
-        cv.updateCalendar(events);
-
 
         mBottomNav = (BottomNavigationView) findViewById(R.id.navigation);
-        mBottomNav.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+        mBottomNav.setOnNavigationItemSelectedListener(new BottomNavigationView
+                .OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 selectFragment(item);
@@ -56,7 +53,6 @@ public class CalendarActivity extends AppCompatActivity {
     }
 
     private void selectFragment(MenuItem item) {
-
         switch (item.getItemId()) {
             case R.id.menu_cal:
                 break;
